@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA9A7D241F036406007CF3A0 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D231F036406007CF3A0 /* iflyMSC.framework */; };
+		5D2EEF2E1F08EF1A00F0268A /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */; };
 		AA9A7D271F03642D007CF3A0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D261F03642D007CF3A0 /* libz.tbd */; };
 		AA9A7D291F036436007CF3A0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D281F036436007CF3A0 /* AVFoundation.framework */; };
 		AA9A7D2B1F03643F007CF3A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D2A1F03643F007CF3A0 /* SystemConfiguration.framework */; };
@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AA9A7D231F036406007CF3A0 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		AA9A7D261F03642D007CF3A0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA9A7D281F036436007CF3A0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AA9A7D2A1F03643F007CF3A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -93,6 +93,7 @@
 				AA9A7D391F03649D007CF3A0 /* AddressBook.framework in Frameworks */,
 				AA9A7D371F036494007CF3A0 /* Contacts.framework in Frameworks */,
 				AA9A7D351F036482007CF3A0 /* CoreLocation.framework in Frameworks */,
+				5D2EEF2E1F08EF1A00F0268A /* iflyMSC.framework in Frameworks */,
 				AA9A7D331F036479007CF3A0 /* UIKit.framework in Frameworks */,
 				AA9A7D311F036470007CF3A0 /* AudioToolbox.framework in Frameworks */,
 				AA9A7D2F1F03645D007CF3A0 /* CoreTelephony.framework in Frameworks */,
@@ -100,7 +101,6 @@
 				AA9A7D2B1F03643F007CF3A0 /* SystemConfiguration.framework in Frameworks */,
 				AA9A7D291F036436007CF3A0 /* AVFoundation.framework in Frameworks */,
 				AA9A7D271F03642D007CF3A0 /* libz.tbd in Frameworks */,
-				AA9A7D241F036406007CF3A0 /* iflyMSC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +174,7 @@
 				AADEA3A11F03630F00B2DB84 /* Assets.xcassets */,
 				AADEA3A31F03630F00B2DB84 /* LaunchScreen.storyboard */,
 				AADEA3A61F03630F00B2DB84 /* Info.plist */,
-				AA9A7D231F036406007CF3A0 /* iflyMSC.framework */,
+				5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */,
 			);
 			path = IFlyTest;
 			sourceTree = "<group>";
