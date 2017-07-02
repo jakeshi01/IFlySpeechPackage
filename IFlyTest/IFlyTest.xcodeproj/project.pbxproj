@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D2EEF2E1F08EF1A00F0268A /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */; };
+		5D2EEF301F08F6DB00F0268A /* SpeechRecognizerHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2EEF2F1F08F6DB00F0268A /* SpeechRecognizerHandleView.swift */; };
 		AA9A7D271F03642D007CF3A0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D261F03642D007CF3A0 /* libz.tbd */; };
 		AA9A7D291F036436007CF3A0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D281F036436007CF3A0 /* AVFoundation.framework */; };
 		AA9A7D2B1F03643F007CF3A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D2A1F03643F007CF3A0 /* SystemConfiguration.framework */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		5D2EEF2F1F08F6DB00F0268A /* SpeechRecognizerHandleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerHandleView.swift; sourceTree = "<group>"; };
 		AA9A7D261F03642D007CF3A0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA9A7D281F036436007CF3A0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AA9A7D2A1F03643F007CF3A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -170,6 +172,7 @@
 				AADEA39C1F03630F00B2DB84 /* ViewController.swift */,
 				AA9A7D451F039EE4007CF3A0 /* SpeechProtocol.swift */,
 				AA9A7D471F06411E007CF3A0 /* SpeechRecognizerBar.swift */,
+				5D2EEF2F1F08F6DB00F0268A /* SpeechRecognizerHandleView.swift */,
 				AADEA39E1F03630F00B2DB84 /* Main.storyboard */,
 				AADEA3A11F03630F00B2DB84 /* Assets.xcassets */,
 				AADEA3A31F03630F00B2DB84 /* LaunchScreen.storyboard */,
@@ -335,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D2EEF301F08F6DB00F0268A /* SpeechRecognizerHandleView.swift in Sources */,
 				AA9A7D461F039EE4007CF3A0 /* SpeechProtocol.swift in Sources */,
 				AA9A7D481F06411E007CF3A0 /* SpeechRecognizerBar.swift in Sources */,
 				AADEA39D1F03630F00B2DB84 /* ViewController.swift in Sources */,
