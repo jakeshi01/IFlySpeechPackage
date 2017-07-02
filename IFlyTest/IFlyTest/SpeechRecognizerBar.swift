@@ -33,6 +33,7 @@ class SpeechRecognizerBar: UIView {
     }()
     
     fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
+    var handleView: SpeechRecognizerHandleView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
