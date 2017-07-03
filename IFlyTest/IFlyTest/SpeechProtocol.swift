@@ -58,6 +58,7 @@ protocol SpeechRecognizeable {
     
     func startListening()
     func stopListening()
+    func cancelSpeech()
 }
 
 @objc protocol SpeechRecognizerDelegate {
@@ -107,6 +108,10 @@ extension SpeechRecognizer {
     func cancelSpeech() {
         speechRecognizer.cancel()
         speechRecognizer.stopListening()
+    }
+    
+    func isListening() -> Bool {
+        return speechRecognizer.isListening
     }
 }
 

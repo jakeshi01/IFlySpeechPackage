@@ -34,6 +34,7 @@ class SpeechRecognizerBar: UIView {
     
     fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     fileprivate var recognizeResult: String = ""
+    fileprivate var isFirstRecognize: Bool = true
     var handleView: SpeechRecognizerHandleView?
     
     override init(frame: CGRect) {
@@ -69,10 +70,15 @@ private extension SpeechRecognizerBar {
         addSubview(seperateLine)
         backgroundColor = UIColor.lightGray
         
+        //此处用于解决讯飞第一次短暂识别（单击，无语音）无数据（错误码应该为10118时）实际返回errorCode = 0的问题
+        speechRecognizer.startListening()
+        speechRecognizer.stopListening()
+        
         speechRecognizer.delegate = self
     }
     
     @objc func beginSpeech() {
+        isFirstRecognize = false
         showHandleView()
         speechRecognizer.startListening()
         handleView?.beginSpeech()
@@ -118,8 +124,7 @@ private extension SpeechRecognizerBar {
 extension SpeechRecognizerBar: SpeechRecognizerDelegate {
     
     func onError(errorCode: IFlySpeechError) {
-        print("errorCode = \(errorCode.errorCode)")
-        handleView?.dismissProgressHud()
+        print("errorCode = \(errorCode.errorDesc)")
         if errorCode.errorCode == SpeechError.successCode.rawValue {
             
         } else if errorCode.errorCode == SpeechError.networkDisableCode.rawValue {
@@ -154,6 +159,7 @@ extension SpeechRecognizerBar: SpeechRecognizerDelegate {
     
     func onEndOfSpeech() {
         print("识别中")
+        guard !isFirstRecognize else { return }
         handleView?.showProgressHud()
     }
     

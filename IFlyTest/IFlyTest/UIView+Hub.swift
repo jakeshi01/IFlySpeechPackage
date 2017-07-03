@@ -47,6 +47,6 @@ extension UIView {
     }
     
     func hideHUD(_ animated: Bool = true) {
-        MBProgressHUD.hide(for: self, animated: animated)
+        MBProgressHUD.hide(for: self, animated: false)
     }
 }

@@ -135,12 +135,12 @@ extension SpeechRecognizerHandleView {
     
     func setRecognizeResult(_ result: String?) {
         guard !willCancel else { return }
-      
-        self.dismissProgressHud()
-        self.resultLabel.isHidden = false
-        self.resultLabel.text = result
-        self.resultLabel.sizeToFit()
-        
+        delay(0.5) {
+            self.dismissProgressHud()
+            self.resultLabel.text = result
+            self.resultLabel.sizeToFit()
+            self.resultLabel.isHidden = false
+        }
     }
     
     func showProgressHud() {
