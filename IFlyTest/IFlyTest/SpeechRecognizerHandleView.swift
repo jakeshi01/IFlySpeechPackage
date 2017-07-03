@@ -14,7 +14,7 @@ class SpeechRecognizerHandleView: UIView {
     lazy fileprivate var stateImageView: UIImageView = {
         
         let imageView = UIImageView(frame: CGRect.zero)
-        
+        imageView.image = #imageLiteral(resourceName: "speech_1")
         return imageView
     }()
     
@@ -57,11 +57,14 @@ class SpeechRecognizerHandleView: UIView {
 private extension SpeechRecognizerHandleView {
     
     func initialization() {
+        
         backgroundColor = UIColor.init(white: 1, alpha: 0.9)
+        resultLabel.isHidden = true
         
         addSubview(resultLabel)
         addSubview(stateImageView)
     }
+
 }
 
 extension SpeechRecognizerHandleView {
@@ -72,5 +75,12 @@ extension SpeechRecognizerHandleView {
     
     func cancelSpeech() {
         
+    }
+    
+    func setRecognizeResult(_ result: String?) {
+        stateImageView.isHidden = true
+        resultLabel.isHidden = false
+        
+        resultLabel.text = result
     }
 }
