@@ -65,7 +65,7 @@ protocol SpeechRecognizeable {
     @objc func onError(errorCode code: IFlySpeechError)
     @objc func onResults(_ results:Array<Any>?, isLast:Bool)
     
-    @objc optional func onVolumeChanged(volumeValue value: Int)
+    @objc optional func onVolumeChanged(volumeValue value: Int32)
     @objc optional func onBeginOfSpeech()
     @objc optional func onEndOfSpeech()
     @objc optional func onCancel()
@@ -103,6 +103,10 @@ extension SpeechRecognizer {
     func stopListening() {
         speechRecognizer.stopListening()
     }
+    
+    func cancelSpeech() {
+        speechRecognizer.cancel()
+    }
 }
 
 // IFlySpeechRecognizerDelegate
@@ -116,7 +120,7 @@ extension SpeechRecognizer: IFlySpeechRecognizerDelegate {
         delegate?.onResults(results, isLast: isLast)
     }
     
-    private func onVolumeChanged(_ volume: Int) {
+    func onVolumeChanged(_ volume: Int32) {
         delegate?.onVolumeChanged?(volumeValue: volume)
     }
     

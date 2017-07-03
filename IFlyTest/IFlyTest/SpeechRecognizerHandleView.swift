@@ -23,11 +23,13 @@ class SpeechRecognizerHandleView: UIView {
         let label = UILabel(frame: CGRect.zero)
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15)
+        label.textAlignment = .center
         label.textColor = UIColor.red
         
         return label
     }()
     
+    fileprivate var willCancel: Bool = false
    
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,18 +71,51 @@ private extension SpeechRecognizerHandleView {
 
 extension SpeechRecognizerHandleView {
     
-    func speechAnimation() {
+    func speechAnimation(with volume: Int32) {
         
+        guard !willCancel else { return }
+        let rate = Double(volume) / 30.0
+        let base = 5 / 30.0
+
+        if rate <= base {
+            stateImageView.image = #imageLiteral(resourceName: "speech_1")
+        } else if rate <= base * 2 {
+            stateImageView.image = #imageLiteral(resourceName: "speech_2")
+        } else if rate <= base * 3 {
+            stateImageView.image = #imageLiteral(resourceName: "speech_3")
+        } else if rate <= base * 4 {
+            stateImageView.image = #imageLiteral(resourceName: "speech_4")
+        } else if rate <= base * 5 {
+            stateImageView.image = #imageLiteral(resourceName: "speech_5")
+        } else if rate <= base * 7 {
+            stateImageView.image = #imageLiteral(resourceName: "speech_6")
+        } else {
+            stateImageView.image = #imageLiteral(resourceName: "speech_7")
+        }
     }
     
     func cancelSpeech() {
-        
+        stateImageView.image = #imageLiteral(resourceName: "cancel_speech")
+        willCancel = true
+    }
+    
+    func goOnSpeech() {
+        willCancel = false
+    }
+    
+    func endSpeech() {
+        stateImageView.isHidden = true
+        stateImageView.image = #imageLiteral(resourceName: "speech_1")
     }
     
     func setRecognizeResult(_ result: String?) {
-        stateImageView.isHidden = true
+        endSpeech()
         resultLabel.isHidden = false
-        
         resultLabel.text = result
+        resultLabel.sizeToFit()
+    }
+    
+    func showProgressHub() {
+        
     }
 }

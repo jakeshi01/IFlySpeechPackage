@@ -33,6 +33,7 @@ class SpeechRecognizerBar: UIView {
     }()
     
     fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
+    fileprivate var recognizeResult: String = ""
     var handleView: SpeechRecognizerHandleView?
     
     override init(frame: CGRect) {
@@ -72,26 +73,25 @@ private extension SpeechRecognizerBar {
     }
     
     @objc func beginSpeech() {
-        print("开始")
         speechRecognizer.startListening()
     }
     
     @objc func willCancelSpeech() {
-        print("手指移出")
+        handleView?.cancelSpeech()
     }
     
     @objc func resumeSpeech() {
-        print("手指移入")
+        handleView?.goOnSpeech()
     }
     
     @objc func speechEnd() {
-        print("结束")
         speechRecognizer.stopListening()
     }
     
     @objc func speechCanceled() {
-        print("取消")
-        speechRecognizer.stopListening()
+        speechRecognizer.cancelSpeech()
+        handleView?.endSpeech()
+        handleView?.isHidden = true
     }
 }
 
@@ -122,19 +122,26 @@ extension SpeechRecognizerBar: SpeechRecognizerDelegate {
             resultStr += key
         }
         
-//        recognizeResult = textField.text! + resultStr
-        
-        let resultJson = SpeechRecognizerConfig.serializeSpeechRecognizeResult(from: resultStr)
-        
-//        textField.text = textField.text! + resultJson!
-        
-        if isLast {
-//            print("听写结果(json)：\(recognizeResult)")
+        if let resultJson = SpeechRecognizerConfig.serializeSpeechRecognizeResult(from: resultStr) {
+             recognizeResult += resultJson
         }
+        if isLast {
+            handleView?.setRecognizeResult(recognizeResult)
+        }
+        
     }
     
     func onEndOfSpeech() {
         print("识别中")
+    }
+    
+    func onCancel() {
+        print("取消识别")
+    }
+    
+    func onVolumeChanged(volumeValue value: Int32) {
+        
+        handleView?.speechAnimation(with: value)
     }
     
 }
