@@ -73,7 +73,9 @@ private extension SpeechRecognizerBar {
     }
     
     @objc func beginSpeech() {
+        showHandleView()
         speechRecognizer.startListening()
+        handleView?.beginSpeech()
     }
     
     @objc func willCancelSpeech() {
@@ -91,7 +93,25 @@ private extension SpeechRecognizerBar {
     @objc func speechCanceled() {
         speechRecognizer.cancelSpeech()
         handleView?.endSpeech()
-        handleView?.isHidden = true
+        handleViewDismissAnimation()
+    }
+    
+    func handleViewDismissAnimation() {
+        UIView.animate(withDuration: 0.3, animations: { 
+            self.handleView?.alpha = 0
+        }) { _ in
+            self.handleView?.isHidden = true
+        }
+    }
+    
+    func showHandleView() {
+        
+        guard let handle = handleView, handle.isHidden else { return }
+        handle.alpha = 0
+        handle.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            handle.alpha = 0.9
+        })
     }
 }
 
@@ -99,6 +119,7 @@ extension SpeechRecognizerBar: SpeechRecognizerDelegate {
     
     func onError(errorCode: IFlySpeechError) {
         print("errorCode = \(errorCode.errorCode)")
+        handleView?.dismissProgressHud()
         if errorCode.errorCode == SpeechError.successCode.rawValue {
             
         } else if errorCode.errorCode == SpeechError.networkDisableCode.rawValue {
@@ -106,18 +127,18 @@ extension SpeechRecognizerBar: SpeechRecognizerDelegate {
         } else if  errorCode.errorCode == SpeechError.recordDisabelCode.rawValue {
             
         } else{
-            
+             handleView?.setRecognizeResult("未识别到语音")
         }
     }
     
     func onResults(_ results: [Any]?, isLast: Bool) {
-        
+    
         var resultStr = ""
         guard let dic = results?.first as? Dictionary<String, Any> else{
-            print("未能识别")
+            handleView?.setRecognizeResult("未识别到语音")
             return
         }
-        
+    
         dic.keys.forEach { key in
             resultStr += key
         }
@@ -133,6 +154,7 @@ extension SpeechRecognizerBar: SpeechRecognizerDelegate {
     
     func onEndOfSpeech() {
         print("识别中")
+        handleView?.showProgressHud()
     }
     
     func onCancel() {
@@ -140,7 +162,6 @@ extension SpeechRecognizerBar: SpeechRecognizerDelegate {
     }
     
     func onVolumeChanged(volumeValue value: Int32) {
-        
         handleView?.speechAnimation(with: value)
     }
     

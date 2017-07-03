@@ -30,6 +30,15 @@ class SpeechRecognizerHandleView: UIView {
     }()
     
     fileprivate var willCancel: Bool = false
+    
+    override var isHidden: Bool {
+        didSet{
+            super.isHidden = isHidden
+            if isHidden {
+                reset()
+            }
+        }
+    }
    
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,6 +56,7 @@ class SpeechRecognizerHandleView: UIView {
         let width = bounds.width
         let height = bounds.height
         
+
         resultLabel.center = center
         resultLabel.frame.origin.x = 20
         resultLabel.frame.size.width = width - 40
@@ -62,14 +72,29 @@ private extension SpeechRecognizerHandleView {
         
         backgroundColor = UIColor.init(white: 1, alpha: 0.9)
         resultLabel.isHidden = true
+        stateImageView.isHidden = true
         
         addSubview(resultLabel)
         addSubview(stateImageView)
+    }
+    
+    func reset() {
+        resultLabel.isHidden = true
+        stateImageView.isHidden = true
+        
+        resultLabel.text = ""
+        willCancel = false
     }
 
 }
 
 extension SpeechRecognizerHandleView {
+    
+    func beginSpeech() {
+        resultLabel.text = ""
+        resultLabel.isHidden = true
+        stateImageView.isHidden = false
+    }
     
     func speechAnimation(with volume: Int32) {
         
@@ -109,13 +134,22 @@ extension SpeechRecognizerHandleView {
     }
     
     func setRecognizeResult(_ result: String?) {
-        endSpeech()
-        resultLabel.isHidden = false
-        resultLabel.text = result
-        resultLabel.sizeToFit()
+        guard !willCancel else { return }
+      
+        self.dismissProgressHud()
+        self.resultLabel.isHidden = false
+        self.resultLabel.text = result
+        self.resultLabel.sizeToFit()
+        
     }
     
-    func showProgressHub() {
-        
+    func showProgressHud() {
+        guard !willCancel else { return }
+        endSpeech()
+        showLoadingHud()
+    }
+    
+    func dismissProgressHud() {
+        hideHUD()
     }
 }

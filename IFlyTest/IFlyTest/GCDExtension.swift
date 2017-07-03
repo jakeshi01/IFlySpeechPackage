@@ -1,9 +1,9 @@
 //
-//  GCDExtension.swift
-//  JRFoundationApp
+//  AppDelegate.swift
+//  IFlyTest
 //
-//  Created by 王小涛 on 15/8/31.
-//  Copyright © 2015年 王小涛. All rights reserved.
+//  Created by Jake on 2017/6/28.
+//  Copyright © 2017年 Jake. All rights reserved.
 //
 
 import Foundation

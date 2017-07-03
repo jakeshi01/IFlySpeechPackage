@@ -106,6 +106,7 @@ extension SpeechRecognizer {
     
     func cancelSpeech() {
         speechRecognizer.cancel()
+        speechRecognizer.stopListening()
     }
 }
 
