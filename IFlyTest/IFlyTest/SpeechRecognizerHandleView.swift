@@ -30,6 +30,7 @@ class SpeechRecognizerHandleView: UIView {
     }()
     
     fileprivate var willCancel: Bool = false
+    var finishAction: (() -> Void)?
     
     override var isHidden: Bool {
         didSet{
@@ -84,6 +85,14 @@ private extension SpeechRecognizerHandleView {
         
         resultLabel.text = ""
         willCancel = false
+    }
+    
+    func dismissAnimation() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.alpha = 0
+        }) { _ in
+            self.isHidden = true
+        }
     }
 
 }
@@ -140,6 +149,7 @@ extension SpeechRecognizerHandleView {
             self.resultLabel.text = result
             self.resultLabel.sizeToFit()
             self.resultLabel.isHidden = false
+            self.finishAction?()
         }
     }
     

@@ -35,18 +35,22 @@ extension UIView {
         let hud = MBProgressHUD(view: self)
         hud?.mode = .customView
         hud?.color = UIColor.clear
-        hud?.labelText = "正在识别语音"
+        hud?.labelText = "正在识别语音..."
+        hud?.labelColor = UIColor.lightGray
         
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        customView.backgroundColor = UIColor.clear
         let loadingImageView = UIImageView.init(image: UIImage(named: "preloader.bundle/Preloader_00000@2x"))
-        
+        loadingImageView.center = customView.center
         loadingImageView.loadGif("preloader")
+        customView.addSubview(loadingImageView)
         
-        hud?.customView = loadingImageView
+        hud?.customView = customView
         addSubview(hud!)
         hud?.show(true)
     }
     
-    func hideHUD(_ animated: Bool = true) {
+    func hideHUD() {
         MBProgressHUD.hide(for: self, animated: false)
     }
 }

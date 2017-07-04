@@ -12,7 +12,7 @@ struct SpeechRecognizerConfig {
     
     let domain = "iat"        //应用领域：听写
     let noDot = "0"           //非自动补全标点
-    let rate_16K = "16000"     //采样率= 16k
+    let rate_16K = "16000"     //采样率 = 16k
     let timeOut = "15000"      //识别语音时长 = 15s
     let vad_bos = "3000"       //前段静默检测时长 = 3s
     let vad_eos = "3000"       //后段静默检测时长 = 3s
@@ -22,7 +22,6 @@ struct SpeechRecognizerConfig {
         guard let json = JSONData?.data(using: .utf8) else {
             return nil
         }
-
         guard let param = try? JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) as? [String: Any] else {
             return nil
         }
@@ -109,10 +108,7 @@ extension SpeechRecognizer {
         speechRecognizer.cancel()
         speechRecognizer.stopListening()
     }
-    
-    func isListening() -> Bool {
-        return speechRecognizer.isListening
-    }
+
 }
 
 // IFlySpeechRecognizerDelegate

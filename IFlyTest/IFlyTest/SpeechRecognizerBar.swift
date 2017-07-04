@@ -34,8 +34,15 @@ class SpeechRecognizerBar: UIView {
     
     fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     fileprivate var recognizeResult: String = ""
-    fileprivate var isFirstRecognize: Bool = true
-    var handleView: SpeechRecognizerHandleView?
+    fileprivate var finishTask: Task?
+    
+    var handleView: SpeechRecognizerHandleView? {
+        didSet{
+            handleView?.finishAction = { [weak self] in
+                self?.speechBtn.isEnabled = true
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,16 +76,12 @@ private extension SpeechRecognizerBar {
         addSubview(speechBtn)
         addSubview(seperateLine)
         backgroundColor = UIColor.lightGray
-        
-        //此处用于解决讯飞第一次短暂识别（单击，无语音）无数据（错误码应该为10118时）实际返回errorCode = 0的问题
-        speechRecognizer.startListening()
-        speechRecognizer.stopListening()
-        
+
         speechRecognizer.delegate = self
     }
     
     @objc func beginSpeech() {
-        isFirstRecognize = false
+        cancel(finishTask)
         showHandleView()
         speechRecognizer.startListening()
         handleView?.beginSpeech()
@@ -94,6 +97,8 @@ private extension SpeechRecognizerBar {
     
     @objc func speechEnd() {
         speechRecognizer.stopListening()
+        //识别期间禁止再次点击语音
+        speechBtn.isEnabled = false
     }
     
     @objc func speechCanceled() {
@@ -124,16 +129,24 @@ private extension SpeechRecognizerBar {
 extension SpeechRecognizerBar: SpeechRecognizerDelegate {
     
     func onError(errorCode: IFlySpeechError) {
+        
         print("errorCode = \(errorCode.errorDesc)")
         if errorCode.errorCode == SpeechError.successCode.rawValue {
+            //此处用于解决讯飞第一次短暂识别（单击，无语音）无数据（错误码应该为10118时）实际返回errorCode = 0的问题
+            guard recognizeResult.characters.count == 0 else { return }
+            handleView?.setRecognizeResult("未识别到语音")
             
         } else if errorCode.errorCode == SpeechError.networkDisableCode.rawValue {
-            
-        } else if  errorCode.errorCode == SpeechError.recordDisabelCode.rawValue {
-            
+            //没有网络
+        } else if errorCode.errorCode == SpeechError.recordDisabelCode.rawValue {
+            //录音初始化失败
         } else{
              handleView?.setRecognizeResult("未识别到语音")
         }
+        
+        finishTask = delay(1.0, task: { [weak self] in
+            self?.handleViewDismissAnimation()
+        })
     }
     
     func onResults(_ results: [Any]?, isLast: Bool) {
@@ -151,15 +164,15 @@ extension SpeechRecognizerBar: SpeechRecognizerDelegate {
         if let resultJson = SpeechRecognizerConfig.serializeSpeechRecognizeResult(from: resultStr) {
              recognizeResult += resultJson
         }
+        
         if isLast {
             handleView?.setRecognizeResult(recognizeResult)
+            recognizeResult = ""
         }
-        
     }
     
     func onEndOfSpeech() {
         print("识别中")
-        guard !isFirstRecognize else { return }
         handleView?.showProgressHud()
     }
     
