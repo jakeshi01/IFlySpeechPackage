@@ -9,40 +9,40 @@
 import Foundation
 import UIKit
 
-class SpeechRecognizerBar: UIView {
+protocol SpeechRecognizerControl:class {
     
-    lazy fileprivate var speechBtn: UIButton = {
-        
+    var speechBtn: UIButton { get }
+    var delegate: SpeechRecognizerControlDelegate? { set get }
+}
+
+@objc protocol SpeechRecognizerControlDelegate {
+    
+    @objc func beginSpeech()
+    @objc func willCancelSpeech()
+    @objc func resumeSpeech()
+    @objc func speechEnd()
+    @objc func speechCanceled()
+}
+
+class NormalSpeechRecognizerBar: UIView, SpeechRecognizerControl {
+   
+    lazy var speechBtn: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(#imageLiteral(resourceName: "speech"), for: .normal)
         btn.setTitle("按住  说出你想找什么", for: .normal)
         btn.setTitleColor(UIColor.blue, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.backgroundColor = UIColor.white
-
         return btn
-        
     }()
     
     lazy fileprivate var seperateLine: UIView = {
-        
         let line =  UIView(frame: CGRect.zero)
         line.backgroundColor = UIColor.red
         return line
-        
     }()
     
-    fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
-    fileprivate var recognizeResult: String = ""
-    fileprivate var finishTask: Task?
-    
-    var handleView: SpeechRecognizerHandleView? {
-        didSet{
-            handleView?.finishAction = { [weak self] in
-                self?.speechBtn.isEnabled = true
-            }
-        }
-    }
+    var delegate: SpeechRecognizerControlDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,127 +61,111 @@ class SpeechRecognizerBar: UIView {
         seperateLine.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 0.5)
         speechBtn.layer.cornerRadius = speechBtn.bounds.height / 2
     }
-    
 }
 
-private extension SpeechRecognizerBar {
+private extension NormalSpeechRecognizerBar {
     
     func initialization() {
-        speechBtn.addTarget(self, action: #selector(SpeechRecognizerBar.beginSpeech), for: .touchDown)
-        speechBtn.addTarget(self, action: #selector(SpeechRecognizerBar.resumeSpeech), for: .touchDragEnter)
-        speechBtn.addTarget(self, action: #selector(SpeechRecognizerBar.willCancelSpeech), for: .touchDragExit)
-        speechBtn.addTarget(self, action: #selector(SpeechRecognizerBar.speechEnd), for: .touchUpInside)
-        speechBtn.addTarget(self, action: #selector(SpeechRecognizerBar.speechCanceled), for: .touchUpOutside)
-        
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.beginSpeech), for: .touchDown)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.resumeSpeech), for: .touchDragEnter)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.willCancelSpeech), for: .touchDragExit)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechEnd), for: .touchUpInside)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechCanceled), for: .touchUpOutside)
+
         addSubview(speechBtn)
         addSubview(seperateLine)
         backgroundColor = UIColor.lightGray
-
-        speechRecognizer.delegate = self
     }
     
     @objc func beginSpeech() {
-        cancel(finishTask)
-        showHandleView()
-        speechRecognizer.startListening()
-        handleView?.beginSpeech()
+        delegate?.beginSpeech()
     }
     
     @objc func willCancelSpeech() {
-        handleView?.cancelSpeech()
+        delegate?.willCancelSpeech()
     }
     
     @objc func resumeSpeech() {
-        handleView?.goOnSpeech()
+        delegate?.resumeSpeech()
     }
     
     @objc func speechEnd() {
-        speechRecognizer.stopListening()
-        //识别期间禁止再次点击语音
-        speechBtn.isEnabled = false
+        delegate?.speechEnd()
     }
     
     @objc func speechCanceled() {
-        speechRecognizer.cancelSpeech()
-        handleView?.endSpeech()
-        handleViewDismissAnimation()
-    }
-    
-    func handleViewDismissAnimation() {
-        UIView.animate(withDuration: 0.3, animations: { 
-            self.handleView?.alpha = 0
-        }) { _ in
-            self.handleView?.isHidden = true
-        }
-    }
-    
-    func showHandleView() {
-        
-        guard let handle = handleView, handle.isHidden else { return }
-        handle.alpha = 0
-        handle.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            handle.alpha = 0.9
-        })
+        delegate?.speechCanceled()
     }
 }
 
-extension SpeechRecognizerBar: SpeechRecognizerDelegate {
+class AnimateSpeechRecognizerBar: UIView, SpeechRecognizerControl {
     
-    func onError(errorCode: IFlySpeechError) {
+    lazy var speechBtn: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setImage(#imageLiteral(resourceName: "speech"), for: .normal)
+        btn.backgroundColor = UIColor.clear
+        return btn
+    }()
+    
+    lazy fileprivate var gifImageView: UIImageView = {
+        let imageView = UIImageView(frame: CGRect.zero)
+        return imageView
+    }()
+    
+    var delegate: SpeechRecognizerControlDelegate?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialization()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialization()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        print("errorCode = \(errorCode.errorDesc)")
-        if errorCode.errorCode == SpeechError.successCode.rawValue {
-            //此处用于解决讯飞第一次短暂识别（单击，无语音）无数据（错误码应该为10118时）实际返回errorCode = 0的问题
-            guard recognizeResult.characters.count == 0 else { return }
-            handleView?.setRecognizeResult("未识别到语音")
-            
-        } else if errorCode.errorCode == SpeechError.networkDisableCode.rawValue {
-            //没有网络
-        } else if errorCode.errorCode == SpeechError.recordDisabelCode.rawValue {
-            //录音初始化失败
-        } else{
-             handleView?.setRecognizeResult("未识别到语音")
-        }
-        
-        finishTask = delay(1.0, task: { [weak self] in
-            self?.handleViewDismissAnimation()
-        })
+        speechBtn.frame = CGRect(x: (bounds.width - 80) / 2 , y: (bounds.height - 80) / 2, width: 80, height: 80)
+        gifImageView.frame = bounds
     }
-    
-    func onResults(_ results: [Any]?, isLast: Bool) {
-    
-        var resultStr = ""
-        guard let dic = results?.first as? Dictionary<String, Any> else{
-            handleView?.setRecognizeResult("未识别到语音")
-            return
-        }
-    
-        dic.keys.forEach { key in
-            resultStr += key
-        }
-        
-        if let resultJson = SpeechRecognizerConfig.serializeSpeechRecognizeResult(from: resultStr) {
-             recognizeResult += resultJson
-        }
-        
-        if isLast {
-            handleView?.setRecognizeResult(recognizeResult)
-            recognizeResult = ""
-        }
-    }
-    
-    func onEndOfSpeech() {
-        print("识别中")
-        handleView?.showProgressHud()
-    }
-    
-    func onCancel() {
-        print("取消识别")
-    }
-    
-    func onVolumeChanged(volumeValue value: Int32) {
-        handleView?.speechAnimation(with: value)
-    }
-    
+
 }
+
+private extension AnimateSpeechRecognizerBar {
+    
+    func initialization() {
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.beginSpeech), for: .touchDown)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.resumeSpeech), for: .touchDragEnter)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.willCancelSpeech), for: .touchDragExit)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechEnd), for: .touchUpInside)
+        speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechCanceled), for: .touchUpOutside)
+        
+        addSubview(speechBtn)
+        addSubview(gifImageView)
+        backgroundColor = UIColor.white
+    }
+    
+    @objc func beginSpeech() {
+        delegate?.beginSpeech()
+    }
+    
+    @objc func willCancelSpeech() {
+        delegate?.willCancelSpeech()
+    }
+    
+    @objc func resumeSpeech() {
+        delegate?.resumeSpeech()
+    }
+    
+    @objc func speechEnd() {
+        delegate?.speechEnd()
+    }
+    
+    @objc func speechCanceled() {
+        delegate?.speechCanceled()
+    }
+}
+
+

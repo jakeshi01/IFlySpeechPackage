@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hM6-Ag-2FF" customClass="SpeechRecognizerBar" customModule="IFlyTest" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hM6-Ag-2FF" customClass="NormalSpeechRecognizerBar" customModule="IFlyTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -57,7 +57,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="speechBar" destination="hM6-Ag-2FF" id="8ss-4t-ZLb"/>
+                        <outlet property="recognizerBar" destination="hM6-Ag-2FF" id="UoP-Sq-SbO"/>
                         <outlet property="speechHandleView" destination="YNP-Iq-5cn" id="HKq-te-7Tg"/>
                         <outlet property="textField" destination="r5M-PN-EeQ" id="paf-xb-4hp"/>
                     </connections>

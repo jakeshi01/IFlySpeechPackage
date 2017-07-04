@@ -27,6 +27,7 @@
 		AA9A7D4A1F0A2631007CF3A0 /* UIView+Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A7D491F0A2631007CF3A0 /* UIView+Hub.swift */; };
 		AA9A7D4C1F0A297B007CF3A0 /* preloader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */; };
 		AA9A7D4E1F0A4A3E007CF3A0 /* GCDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A7D4D1F0A4A3E007CF3A0 /* GCDExtension.swift */; };
+		AA9A7D501F0B7313007CF3A0 /* SpeechRecognizerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A7D4F1F0B7312007CF3A0 /* SpeechRecognizerAdapter.swift */; };
 		AADEA39B1F03630F00B2DB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */; };
 		AADEA39D1F03630F00B2DB84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEA39C1F03630F00B2DB84 /* ViewController.swift */; };
 		AADEA3A01F03630F00B2DB84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADEA39E1F03630F00B2DB84 /* Main.storyboard */; };
@@ -78,6 +79,7 @@
 		AA9A7D491F0A2631007CF3A0 /* UIView+Hub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Hub.swift"; sourceTree = "<group>"; };
 		AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = preloader.bundle; sourceTree = "<group>"; };
 		AA9A7D4D1F0A4A3E007CF3A0 /* GCDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDExtension.swift; sourceTree = "<group>"; };
+		AA9A7D4F1F0B7312007CF3A0 /* SpeechRecognizerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerAdapter.swift; sourceTree = "<group>"; };
 		AADEA3971F03630F00B2DB84 /* IFlyTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IFlyTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AADEA39C1F03630F00B2DB84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */,
 				AADEA39C1F03630F00B2DB84 /* ViewController.swift */,
 				AA9A7D451F039EE4007CF3A0 /* SpeechProtocol.swift */,
+				AA9A7D4F1F0B7312007CF3A0 /* SpeechRecognizerAdapter.swift */,
 				AA9A7D471F06411E007CF3A0 /* SpeechRecognizerBar.swift */,
 				5D2EEF2F1F08F6DB00F0268A /* SpeechRecognizerHandleView.swift */,
 				AA9A7D491F0A2631007CF3A0 /* UIView+Hub.swift */,
@@ -416,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D2EEF301F08F6DB00F0268A /* SpeechRecognizerHandleView.swift in Sources */,
+				AA9A7D501F0B7313007CF3A0 /* SpeechRecognizerAdapter.swift in Sources */,
 				AA9A7D461F039EE4007CF3A0 /* SpeechProtocol.swift in Sources */,
 				AA9A7D4A1F0A2631007CF3A0 /* UIView+Hub.swift in Sources */,
 				AA9A7D481F06411E007CF3A0 /* SpeechRecognizerBar.swift in Sources */,
