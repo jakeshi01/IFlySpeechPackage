@@ -20,7 +20,7 @@ class SpeechRecognizerAdapter: NSObject {
             recognizerBar?.delegate = self
         }
     }
-    var handleView: SpeechRecognizerHandleView? {
+    var handleView: SpeechRecognizeAction? {
         didSet{
             handleView?.finishAction = { [weak self] in
                 self?.recognizerBar?.speechBtn.isEnabled = true
@@ -35,41 +35,21 @@ class SpeechRecognizerAdapter: NSObject {
     }
 }
 
-private extension SpeechRecognizerAdapter {
-    
-    func handleViewDismissAnimation() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.handleView?.alpha = 0
-        }) { _ in
-            self.handleView?.isHidden = true
-        }
-    }
-    
-    func showHandleView() {
-        guard let handle = handleView, handle.isHidden else { return }
-        handle.alpha = 0
-        handle.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            handle.alpha = 0.9
-        })
-    }
-
-}
 extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
     
     func beginSpeech() {
         cancel(finishTask)
-        showHandleView()
+        handleView?.showAnimation()
         speechRecognizer.startListening()
-        handleView?.beginSpeech()
+        handleView?.beginSpeechAction()
     }
     
     func willCancelSpeech() {
-        handleView?.cancelSpeech()
+        handleView?.cancelSpeechAction()
     }
     
     func resumeSpeech() {
-        handleView?.goOnSpeech()
+        handleView?.resumeSpeechAction()
     }
     
     func speechEnd() {
@@ -80,8 +60,8 @@ extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
     
     func speechCanceled() {
         speechRecognizer.cancelSpeech()
-        handleView?.endSpeech()
-        handleViewDismissAnimation()
+        handleView?.endSpeechAction()
+        handleView?.dismissAnimation()
     }
     
 }
@@ -105,7 +85,7 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         }
         
         finishTask = delay(1.0, task: { [weak self] in
-            self?.handleViewDismissAnimation()
+            self?.handleView?.dismissAnimation()
         })
     }
     
