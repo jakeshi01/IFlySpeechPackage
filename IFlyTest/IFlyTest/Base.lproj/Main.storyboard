@@ -118,6 +118,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="YaO-Hz-61K" firstAttribute="top" secondItem="zqs-eG-Wvn" secondAttribute="bottom" constant="10" id="6GA-qM-9Pw"/>
                                     <constraint firstItem="YaO-Hz-61K" firstAttribute="centerX" secondItem="Tt9-Ok-cTF" secondAttribute="centerX" id="6lD-sg-LaT"/>
@@ -144,6 +145,7 @@
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awd-cI-W5b" customClass="SpeechRecognizerHandleView" customModule="IFlyTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="65" width="375" height="352"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFL-Jk-lv5" customClass="AnimateSpeechRecognizerBar" customModule="IFlyTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="417" width="375" height="250"/>
@@ -172,6 +174,7 @@
                     <connections>
                         <outlet property="recognizerBar" destination="HFL-Jk-lv5" id="uZm-EX-Djt"/>
                         <outlet property="speechHandleView" destination="Awd-cI-W5b" id="yGi-8W-kDD"/>
+                        <outlet property="tipsView" destination="Tt9-Ok-cTF" id="zPc-Tv-dEZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jo6-I8-5rE" userLabel="First Responder" sceneMemberID="firstResponder"/>

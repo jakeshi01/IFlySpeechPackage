@@ -63,8 +63,8 @@ class SpeechRecognizerHandleView: UIView, SpeechRecognizeAction {
         let width = bounds.width
         let height = bounds.height
     
+        resultLabel.center = CGPoint(x: width / 2, y: height / 2)
         resultLabel.frame.origin.x = 20
-        resultLabel.center = center
         resultLabel.frame.size.width = width - 40
         stateImageView.frame = CGRect(x: (width - 185) / 2, y: (height - 185) / 2, width: 185, height: 185)
     }
@@ -74,7 +74,6 @@ class SpeechRecognizerHandleView: UIView, SpeechRecognizeAction {
 private extension SpeechRecognizerHandleView {
     
     func initialization() {
-        backgroundColor = UIColor.init(white: 1, alpha: 0.9)
         resultLabel.isHidden = true
         stateImageView.isHidden = true
         
@@ -92,9 +91,8 @@ private extension SpeechRecognizerHandleView {
     func showResultAnimated() {
         resultLabel.isHidden = false
         resultLabel.alpha = 0.3
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: 0.3) {
             self.resultLabel.alpha = 1
-            self.resultLabel.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
         }
     }
 }

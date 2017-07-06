@@ -164,7 +164,7 @@ private extension AnimateSpeechRecognizerBar {
             }
        
             self.gifImageView.animationImages = images
-            self.gifImageView.animationDuration = 3.0
+            self.gifImageView.animationDuration = 2.0
         }
     }
     

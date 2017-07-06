@@ -13,8 +13,8 @@ class SpeechRecognizerAdapter: NSObject {
     
     fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     fileprivate var recognizeResult: String = ""
-    fileprivate var currentResult: String = ""
     fileprivate var finishTask: Task?
+    fileprivate var isCanceled: Bool = false
     
     var recognizerBar: SpeechRecognizerControl? {
         didSet{
@@ -60,6 +60,7 @@ extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
     }
     
     func speechCanceled() {
+        isCanceled = true
         handleView?.dismissAnimation()
         speechRecognizer.cancelSpeech()
         handleView?.endSpeechAction()
@@ -77,9 +78,12 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         print("errorCode = \(errorCode.errorDesc)")
         if errorCode.errorCode == SpeechError.successCode.rawValue {
             //此处用于解决讯飞第一次短暂识别（单击，无语音）无数据（错误码应该为10118时）实际返回errorCode = 0的问题
-            let result = currentResult.characters.count == 0 ? "未识别到语音" : currentResult
-            handleView?.setRecognizeResult(result)
-            
+            guard recognizeResult.characters.count == 0 else {
+                recognizeResult = ""
+                return
+            }
+            handleView?.setRecognizeResult("未识别到语音")
+            recognizeResult = ""
         } else if errorCode.errorCode == SpeechError.networkDisableCode.rawValue {
             //没有网络
         } else if errorCode.errorCode == SpeechError.recordDisabelCode.rawValue {
@@ -106,15 +110,14 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         }
         
         if isLast {
-            currentResult = recognizeResult
             handleView?.setRecognizeResult(recognizeResult)
-            recognizeResult = ""
         }
     }
     
     func onEndOfSpeech() {
         print("识别中")
         speechEnd()
+        guard !isCanceled else { return }
         handleView?.showProgressHud()
         //识别期间禁止再次点击语音
         recognizerBar?.speechBtn.isUserInteractionEnabled = false

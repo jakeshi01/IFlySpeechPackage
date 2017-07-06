@@ -29,6 +29,7 @@ class RecognizerBarViewController: UIViewController {
 
 class SpeechRecognizerViewController: UIViewController {
     
+    @IBOutlet weak var tipsView: UIView!
     @IBOutlet weak var recognizerBar: AnimateSpeechRecognizerBar!
     @IBOutlet weak var speechHandleView: SpeechRecognizerHandleView!
     fileprivate let speechAdapter: SpeechRecognizerAdapter = SpeechRecognizerAdapter()
