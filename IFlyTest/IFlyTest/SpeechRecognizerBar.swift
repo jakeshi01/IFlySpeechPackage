@@ -146,11 +146,31 @@ private extension AnimateSpeechRecognizerBar {
         addSubview(gifImageView)
         addSubview(speechBtn)
         backgroundColor = UIColor.white
+        
+        loadGifImages()
+    }
+    
+    func loadGifImages() {
+    
+        guard let path = Bundle.main.path(forResource: "wave", ofType: "bundle") else { return }
+        DispatchQueue.global().async {
+            var images = [UIImage]()
+            if let arrays = try? FileManager.default.contentsOfDirectory(atPath: path) {
+                for name in arrays {
+                    if let image = UIImage(named: "wave.bundle" + "/\(name)") {
+                        images.append(image)
+                    }
+                }
+            }
+       
+            self.gifImageView.animationImages = images
+            self.gifImageView.animationDuration = 3.0
+        }
     }
     
     @objc func beginSpeech() {
         delegate?.beginSpeech()
-        gifImageView.loadGif("wave")
+        gifImageView.startAnimating()
     }
     
     @objc func willCancelSpeech() {

@@ -26,7 +26,6 @@ extension UIImageView {
             }
             DispatchQueue.main.async {
                 self.animationImages = images
-                self.animationDuration = 2.0
                 self.startAnimating()
             }
 

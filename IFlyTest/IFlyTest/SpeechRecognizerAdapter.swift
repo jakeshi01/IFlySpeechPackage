@@ -13,6 +13,7 @@ class SpeechRecognizerAdapter: NSObject {
     
     fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     fileprivate var recognizeResult: String = ""
+    fileprivate var currentResult: String = ""
     fileprivate var finishTask: Task?
     
     var recognizerBar: SpeechRecognizerControl? {
@@ -56,8 +57,6 @@ extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
     func speechEnd() {
         handleView?.endSpeechAction()
         speechRecognizer.stopListening()
-        //识别期间禁止再次点击语音
-        recognizerBar?.speechBtn.isUserInteractionEnabled = false
     }
     
     func speechCanceled() {
@@ -78,8 +77,8 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         print("errorCode = \(errorCode.errorDesc)")
         if errorCode.errorCode == SpeechError.successCode.rawValue {
             //此处用于解决讯飞第一次短暂识别（单击，无语音）无数据（错误码应该为10118时）实际返回errorCode = 0的问题
-//            guard recognizeResult.characters.count == 0 else { return }
-//            handleView?.setRecognizeResult("未识别到语音")
+            let result = currentResult.characters.count == 0 ? "未识别到语音" : currentResult
+            handleView?.setRecognizeResult(result)
             
         } else if errorCode.errorCode == SpeechError.networkDisableCode.rawValue {
             //没有网络
@@ -107,6 +106,7 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         }
         
         if isLast {
+            currentResult = recognizeResult
             handleView?.setRecognizeResult(recognizeResult)
             recognizeResult = ""
         }
@@ -114,7 +114,10 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
     
     func onEndOfSpeech() {
         print("识别中")
+        speechEnd()
         handleView?.showProgressHud()
+        //识别期间禁止再次点击语音
+        recognizerBar?.speechBtn.isUserInteractionEnabled = false
     }
     
     func onCancel() {
