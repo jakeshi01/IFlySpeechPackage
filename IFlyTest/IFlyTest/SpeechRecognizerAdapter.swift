@@ -23,7 +23,7 @@ class SpeechRecognizerAdapter: NSObject {
     var handleView: SpeechRecognizeAction? {
         didSet{
             handleView?.finishAction = { [weak self] in
-                self?.recognizerBar?.speechBtn.isEnabled = true
+                self?.recognizerBar?.speechBtn.isUserInteractionEnabled = true
             }
         }
     }
@@ -38,9 +38,10 @@ class SpeechRecognizerAdapter: NSObject {
 extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
     
     func beginSpeech() {
-        cancel(finishTask)
-        handleView?.showAnimation()
         speechRecognizer.startListening()
+        cancel(finishTask)
+        handleView?.isCancelHidden = true
+        handleView?.showAnimation()
         handleView?.beginSpeechAction()
     }
     
@@ -53,15 +54,16 @@ extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
     }
     
     func speechEnd() {
+        handleView?.endSpeechAction()
         speechRecognizer.stopListening()
         //识别期间禁止再次点击语音
-        recognizerBar?.speechBtn.isEnabled = false
+        recognizerBar?.speechBtn.isUserInteractionEnabled = false
     }
     
     func speechCanceled() {
+        handleView?.dismissAnimation()
         speechRecognizer.cancelSpeech()
         handleView?.endSpeechAction()
-        handleView?.dismissAnimation()
     }
     
 }
@@ -69,12 +71,15 @@ extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
 extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
     
     func onError(errorCode: IFlySpeechError) {
-        
+        handleView?.isCancelHidden = false
+        finishTask = delay(1.0, task: { [weak self] in
+            self?.handleView?.dismissAnimation()
+        })
         print("errorCode = \(errorCode.errorDesc)")
         if errorCode.errorCode == SpeechError.successCode.rawValue {
             //此处用于解决讯飞第一次短暂识别（单击，无语音）无数据（错误码应该为10118时）实际返回errorCode = 0的问题
-            guard recognizeResult.characters.count == 0 else { return }
-            handleView?.setRecognizeResult("未识别到语音")
+//            guard recognizeResult.characters.count == 0 else { return }
+//            handleView?.setRecognizeResult("未识别到语音")
             
         } else if errorCode.errorCode == SpeechError.networkDisableCode.rawValue {
             //没有网络
@@ -83,10 +88,6 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         } else{
             handleView?.setRecognizeResult("未识别到语音")
         }
-        
-        finishTask = delay(1.0, task: { [weak self] in
-            self?.handleView?.dismissAnimation()
-        })
     }
     
     func onResults(_ results: [Any]?, isLast: Bool) {

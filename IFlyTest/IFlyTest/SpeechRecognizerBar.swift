@@ -102,13 +102,14 @@ class AnimateSpeechRecognizerBar: UIView, SpeechRecognizerControl {
     
     lazy var speechBtn: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(#imageLiteral(resourceName: "speech"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "mic_red"), for: .normal)
         btn.backgroundColor = UIColor.clear
         return btn
     }()
     
     lazy fileprivate var gifImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect.zero)
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -142,29 +143,34 @@ private extension AnimateSpeechRecognizerBar {
         speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechEnd), for: .touchUpInside)
         speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechCanceled), for: .touchUpOutside)
         
-        addSubview(speechBtn)
         addSubview(gifImageView)
+        addSubview(speechBtn)
         backgroundColor = UIColor.white
     }
     
     @objc func beginSpeech() {
         delegate?.beginSpeech()
+        gifImageView.loadGif("wave")
     }
     
     @objc func willCancelSpeech() {
         delegate?.willCancelSpeech()
+        gifImageView.stopAnimating()
     }
     
     @objc func resumeSpeech() {
         delegate?.resumeSpeech()
+        gifImageView.loadGif("wave")
     }
     
     @objc func speechEnd() {
         delegate?.speechEnd()
+        gifImageView.stopAnimating()
     }
     
     @objc func speechCanceled() {
         delegate?.speechCanceled()
+        gifImageView.stopAnimating()
     }
 }
 

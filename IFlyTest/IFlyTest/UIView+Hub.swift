@@ -15,16 +15,23 @@ extension UIImageView {
     func loadGif(_ bundleName: String) {
         
         guard let path = Bundle.main.path(forResource: bundleName, ofType: "bundle") else { return }
-        var images = [UIImage]()
-        if let arrays = try? FileManager.default.contentsOfDirectory(atPath: path) {
-            for name in arrays {
-                if let image = UIImage(named: "\(bundleName).bundle" + "/\(name)") {
-                    images.append(image)
+        DispatchQueue.global().async {
+            var images = [UIImage]()
+            if let arrays = try? FileManager.default.contentsOfDirectory(atPath: path) {
+                for name in arrays {
+                    if let image = UIImage(named: "\(bundleName).bundle" + "/\(name)") {
+                        images.append(image)
+                    }
                 }
             }
+            DispatchQueue.main.async {
+                self.animationImages = images
+                self.animationDuration = 2.0
+                self.startAnimating()
+            }
+
         }
-        self.animationImages = images
-        self.startAnimating()
+        
     }
     
 }

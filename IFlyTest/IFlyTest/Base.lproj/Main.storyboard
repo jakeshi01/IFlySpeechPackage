@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xc3-Pa-vgp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Recognizer Bar View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="IFlyTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RecognizerBarViewController" customModule="IFlyTest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -64,7 +64,119 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116" y="123.68815592203899"/>
+            <point key="canvasLocation" x="-943" y="115"/>
+        </scene>
+        <!--Speech Recognizer View Controller-->
+        <scene sceneID="Rvi-vz-tyY">
+            <objects>
+                <viewController id="xc3-Pa-vgp" customClass="SpeechRecognizerViewController" customModule="IFlyTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7yV-m6-gFx"/>
+                        <viewControllerLayoutGuide type="bottom" id="gSs-Nx-OZh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xmO-9D-ZPY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tt9-Ok-cTF">
+                                <rect key="frame" x="0.0" y="114" width="375" height="210"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你可以这样说" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gC3-lA-shD">
+                                        <rect key="frame" x="115" y="0.0" width="146" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“法式美甲款式”" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5P-7S-SlX">
+                                        <rect key="frame" x="124" y="54" width="127" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“晕染怎么做”" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqs-eG-Wvn">
+                                        <rect key="frame" x="133" y="85" width="109" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“北鸥甲油胶”" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YaO-Hz-61K">
+                                        <rect key="frame" x="133" y="116.5" width="109" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“罐装胶测评”" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRh-Ss-ojv">
+                                        <rect key="frame" x="133" y="148" width="109" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=". . . . . ." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RG3-ar-SOb">
+                                        <rect key="frame" x="161" y="174.5" width="53" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="YaO-Hz-61K" firstAttribute="top" secondItem="zqs-eG-Wvn" secondAttribute="bottom" constant="10" id="6GA-qM-9Pw"/>
+                                    <constraint firstItem="YaO-Hz-61K" firstAttribute="centerX" secondItem="Tt9-Ok-cTF" secondAttribute="centerX" id="6lD-sg-LaT"/>
+                                    <constraint firstItem="WRh-Ss-ojv" firstAttribute="top" secondItem="YaO-Hz-61K" secondAttribute="bottom" constant="10" id="8zR-FJ-hRe"/>
+                                    <constraint firstAttribute="height" constant="210" id="Eiq-Oa-zKX"/>
+                                    <constraint firstItem="RG3-ar-SOb" firstAttribute="centerX" secondItem="Tt9-Ok-cTF" secondAttribute="centerX" id="HqY-T0-Usi"/>
+                                    <constraint firstItem="gC3-lA-shD" firstAttribute="top" secondItem="Tt9-Ok-cTF" secondAttribute="top" id="J0h-9b-AmZ"/>
+                                    <constraint firstItem="zqs-eG-Wvn" firstAttribute="top" secondItem="t5P-7S-SlX" secondAttribute="bottom" constant="10" id="MiN-vN-aal"/>
+                                    <constraint firstItem="t5P-7S-SlX" firstAttribute="centerX" secondItem="Tt9-Ok-cTF" secondAttribute="centerX" id="NKV-Yn-gJO"/>
+                                    <constraint firstItem="RG3-ar-SOb" firstAttribute="top" secondItem="WRh-Ss-ojv" secondAttribute="bottom" constant="5" id="R3F-hn-Fqd"/>
+                                    <constraint firstItem="t5P-7S-SlX" firstAttribute="top" secondItem="gC3-lA-shD" secondAttribute="bottom" constant="25" id="YOH-Ji-gsw"/>
+                                    <constraint firstItem="gC3-lA-shD" firstAttribute="centerX" secondItem="Tt9-Ok-cTF" secondAttribute="centerX" id="a01-TP-SIl"/>
+                                    <constraint firstItem="WRh-Ss-ojv" firstAttribute="centerX" secondItem="Tt9-Ok-cTF" secondAttribute="centerX" id="d6c-QZ-6x5"/>
+                                    <constraint firstItem="zqs-eG-Wvn" firstAttribute="centerX" secondItem="Tt9-Ok-cTF" secondAttribute="centerX" id="vB9-3c-9XW"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3R2-At-u55">
+                                <rect key="frame" x="325" y="30" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="9e6-bA-s8s"/>
+                                    <constraint firstAttribute="width" constant="35" id="RAR-v2-GPQ"/>
+                                </constraints>
+                                <state key="normal" title="关闭"/>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awd-cI-W5b" customClass="SpeechRecognizerHandleView" customModule="IFlyTest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="65" width="375" height="352"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFL-Jk-lv5" customClass="AnimateSpeechRecognizerBar" customModule="IFlyTest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="417" width="375" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="lzg-v5-X5U"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HFL-Jk-lv5" secondAttribute="trailing" id="FyS-hC-Jio"/>
+                            <constraint firstItem="HFL-Jk-lv5" firstAttribute="top" secondItem="Awd-cI-W5b" secondAttribute="bottom" id="IiX-fN-OXW"/>
+                            <constraint firstItem="gSs-Nx-OZh" firstAttribute="top" secondItem="HFL-Jk-lv5" secondAttribute="bottom" id="IlW-53-XL9"/>
+                            <constraint firstItem="HFL-Jk-lv5" firstAttribute="leading" secondItem="xmO-9D-ZPY" secondAttribute="leading" id="O34-Mm-iTs"/>
+                            <constraint firstItem="Tt9-Ok-cTF" firstAttribute="leading" secondItem="xmO-9D-ZPY" secondAttribute="leading" id="Qm4-HP-jPk"/>
+                            <constraint firstAttribute="trailing" secondItem="Awd-cI-W5b" secondAttribute="trailing" id="dq6-5X-C6E"/>
+                            <constraint firstItem="3R2-At-u55" firstAttribute="trailing" secondItem="xmO-9D-ZPY" secondAttribute="trailing" constant="-15" id="fa1-lQ-myA"/>
+                            <constraint firstItem="3R2-At-u55" firstAttribute="top" secondItem="7yV-m6-gFx" secondAttribute="bottom" constant="10" id="frJ-Ex-lKf"/>
+                            <constraint firstItem="Awd-cI-W5b" firstAttribute="leading" secondItem="xmO-9D-ZPY" secondAttribute="leading" id="kIp-7e-KVK"/>
+                            <constraint firstItem="Tt9-Ok-cTF" firstAttribute="top" secondItem="7yV-m6-gFx" secondAttribute="bottom" constant="94" id="tpG-RF-A2S"/>
+                            <constraint firstAttribute="trailing" secondItem="Tt9-Ok-cTF" secondAttribute="trailing" id="v6e-6O-WG7"/>
+                            <constraint firstItem="Awd-cI-W5b" firstAttribute="top" secondItem="3R2-At-u55" secondAttribute="bottom" id="vlo-9d-6eR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="recognizerBar" destination="HFL-Jk-lv5" id="uZm-EX-Djt"/>
+                        <outlet property="speechHandleView" destination="Awd-cI-W5b" id="yGi-8W-kDD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jo6-I8-5rE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1713" y="115"/>
         </scene>
     </scenes>
 </document>

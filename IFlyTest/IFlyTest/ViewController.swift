@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RecognizerBarViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var recognizerBar: NormalSpeechRecognizerBar!
@@ -25,3 +25,20 @@ class ViewController: UIViewController {
     }
 
 }
+
+
+class SpeechRecognizerViewController: UIViewController {
+    
+    @IBOutlet weak var recognizerBar: AnimateSpeechRecognizerBar!
+    @IBOutlet weak var speechHandleView: SpeechRecognizerHandleView!
+    fileprivate let speechAdapter: SpeechRecognizerAdapter = SpeechRecognizerAdapter()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        speechAdapter.recognizerBar = recognizerBar
+        speechAdapter.handleView = speechHandleView
+        
+    }
+}
+

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5D2EEF2E1F08EF1A00F0268A /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */; };
 		5D2EEF301F08F6DB00F0268A /* SpeechRecognizerHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2EEF2F1F08F6DB00F0268A /* SpeechRecognizerHandleView.swift */; };
+		AA13A2371F0D028000C7EC6B /* wave.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA13A2361F0D028000C7EC6B /* wave.bundle */; };
 		AA9A7D271F03642D007CF3A0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D261F03642D007CF3A0 /* libz.tbd */; };
 		AA9A7D291F036436007CF3A0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D281F036436007CF3A0 /* AVFoundation.framework */; };
 		AA9A7D2B1F03643F007CF3A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9A7D2A1F03643F007CF3A0 /* SystemConfiguration.framework */; };
@@ -60,6 +61,7 @@
 		5D2EEF2F1F08F6DB00F0268A /* SpeechRecognizerHandleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerHandleView.swift; sourceTree = "<group>"; };
 		7E72683266DA42E4944CAE55 /* Pods-IFlyTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IFlyTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IFlyTest/Pods-IFlyTest.debug.xcconfig"; sourceTree = "<group>"; };
 		A3E645ADFADC2C7D37137370 /* Pods-IFlyTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IFlyTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-IFlyTest/Pods-IFlyTest.release.xcconfig"; sourceTree = "<group>"; };
+		AA13A2361F0D028000C7EC6B /* wave.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = wave.bundle; sourceTree = "<group>"; };
 		AA9A7D261F03642D007CF3A0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA9A7D281F036436007CF3A0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AA9A7D2A1F03643F007CF3A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -204,6 +206,7 @@
 				AADEA3A11F03630F00B2DB84 /* Assets.xcassets */,
 				AADEA3A31F03630F00B2DB84 /* LaunchScreen.storyboard */,
 				AADEA3A61F03630F00B2DB84 /* Info.plist */,
+				AA13A2361F0D028000C7EC6B /* wave.bundle */,
 				AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */,
 				5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */,
 			);
@@ -346,6 +349,7 @@
 				AADEA3A21F03630F00B2DB84 /* Assets.xcassets in Resources */,
 				AA9A7D4C1F0A297B007CF3A0 /* preloader.bundle in Resources */,
 				AADEA3A01F03630F00B2DB84 /* Main.storyboard in Resources */,
+				AA13A2371F0D028000C7EC6B /* wave.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

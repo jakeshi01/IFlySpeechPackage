@@ -12,6 +12,7 @@ import UIKit
 protocol SpeechRecognizeAction {
 
     var finishAction: (() -> Void)? { set get }
+    var isCancelHidden: Bool { set get }
     
     func beginSpeechAction()
     func speechAnimation(with volume: Int32)
@@ -26,9 +27,10 @@ protocol SpeechRecognizeAction {
 }
 
 class SpeechRecognizerHandleView: UIView, SpeechRecognizeAction {
-    
+
     var finishAction: (() -> Void)?
     fileprivate var willCancel: Bool = false
+    var isCancelHidden: Bool = false
     
     lazy fileprivate var stateImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect.zero)
@@ -86,7 +88,7 @@ private extension SpeechRecognizerHandleView {
         resultLabel.text = ""
         willCancel = false
     }
-
+    
 }
 
 extension SpeechRecognizerHandleView {
@@ -98,7 +100,6 @@ extension SpeechRecognizerHandleView {
     }
     
     func speechAnimation(with volume: Int32) {
-        
         guard !willCancel else { return }
         let rate = Double(volume) / 30.0
         let base = 5 / 30.0
@@ -137,17 +138,16 @@ extension SpeechRecognizerHandleView {
     func setRecognizeResult(_ result: String?) {
         guard !willCancel else { return }
         delay(0.5) {
+            self.finishAction?()
             self.dismissProgressHud()
             self.resultLabel.text = result
             self.resultLabel.sizeToFit()
             self.resultLabel.isHidden = false
-            self.finishAction?()
         }
     }
     
     func showProgressHud() {
         guard !willCancel else { return }
-        endSpeechAction()
         showLoadingHud()
     }
     
@@ -159,13 +159,14 @@ extension SpeechRecognizerHandleView {
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0
         }) { _ in
-            self.isHidden = true
+            self.isHidden = self.isCancelHidden ? false : true
+            self.alpha = self.isCancelHidden ? 1 : 0
+            guard !self.isCancelHidden else { return }
             self.reset()
         }
     }
 
     func showAnimation() {
-        guard isHidden else { return }
         alpha = 0
         isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
