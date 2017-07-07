@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SpeechRecognizerConfig {
+fileprivate struct IFlySpeechRecognizerConfig {
     
     let domain = "iat"        //应用领域：听写
     let noDot = "0"           //非自动补全标点
@@ -49,12 +49,10 @@ enum SpeechError: Int32 {
 }
 
 protocol SpeechRecognizeable {
-    
-    associatedtype T
-    
-    var speechRecognizer: T { get }
+
     var delegate: SpeechRecognizerDelegate? { set get}
     
+    init()
     func startListening()
     func stopListening()
     func cancelSpeech()
@@ -62,27 +60,30 @@ protocol SpeechRecognizeable {
 
 @objc protocol SpeechRecognizerDelegate {
     
-    @objc func onError(errorCode code: IFlySpeechError)
-    @objc func onResults(_ results:Array<Any>?, isLast:Bool)
+    @objc func onError(_ code: IFlySpeechError)
+    @objc func onResults(_ recognizeResult: String)
     
-    @objc optional func onVolumeChanged(volumeValue value: Int32)
+    @objc optional func onVolumeChanged(_ value: Int32)
     @objc optional func onBeginOfSpeech()
     @objc optional func onEndOfSpeech()
     @objc optional func onCancel()
+
     
 }
 
-class SpeechRecognizer:NSObject, SpeechRecognizeable {
-
-    typealias T = IFlySpeechRecognizer
+class SpeechRecognizer: NSObject, SpeechRecognizeable {
     
-    var speechRecognizer: T
-    var delegate: SpeechRecognizerDelegate?
-    let config: SpeechRecognizerConfig = SpeechRecognizerConfig()
+    weak var delegate: SpeechRecognizerDelegate?
+    fileprivate var recognizeResult: String = ""
+    fileprivate var speechRecognizer: IFlySpeechRecognizer = IFlySpeechRecognizer.sharedInstance()
+    fileprivate let config: IFlySpeechRecognizerConfig = IFlySpeechRecognizerConfig()
     
-    override init() {
-        speechRecognizer = IFlySpeechRecognizer.sharedInstance()
+    override required init() {
         super.init()
+        configIflyRecognizer()
+    }
+    
+    fileprivate func configIflyRecognizer() {
         speechRecognizer.setParameter(config.domain, forKey: IFlySpeechConstant.ifly_DOMAIN())
         speechRecognizer.setParameter(config.noDot, forKey: IFlySpeechConstant.asr_PTT())
         speechRecognizer.setParameter(config.rate_16K, forKey: IFlySpeechConstant.sample_RATE())
@@ -115,15 +116,33 @@ extension SpeechRecognizer {
 extension SpeechRecognizer: IFlySpeechRecognizerDelegate {
     
     func onError(_ errorCode: IFlySpeechError!) {
-        delegate?.onError(errorCode: errorCode)
+        delegate?.onError(errorCode)
     }
     
     func onResults(_ results: [Any]!, isLast: Bool) {
-        delegate?.onResults(results, isLast: isLast)
+        
+        var resultStr = ""
+        guard let dic = results?.first as? Dictionary<String, Any> else{
+            delegate?.onResults("未识别到语音")
+            return
+        }
+        
+        dic.keys.forEach { key in
+            resultStr += key
+        }
+        
+        if let resultJson = IFlySpeechRecognizerConfig.serializeSpeechRecognizeResult(from: resultStr) {
+            recognizeResult += resultJson
+        }
+        
+        if isLast {
+            delegate?.onResults(recognizeResult)
+        }
+        
     }
     
     func onVolumeChanged(_ volume: Int32) {
-        delegate?.onVolumeChanged?(volumeValue: volume)
+        delegate?.onVolumeChanged?(volume)
     }
     
     func onBeginOfSpeech() {
@@ -138,3 +157,5 @@ extension SpeechRecognizer: IFlySpeechRecognizerDelegate {
         delegate?.onCancel?()
     }
 }
+
+

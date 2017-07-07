@@ -88,13 +88,6 @@ private extension SpeechRecognizerHandleView {
         willCancel = false
     }
     
-    func showResultAnimated() {
-        resultLabel.isHidden = false
-        resultLabel.alpha = 0.3
-        UIView.animate(withDuration: 0.3) {
-            self.resultLabel.alpha = 1
-        }
-    }
 }
 
 extension SpeechRecognizerHandleView {
@@ -149,7 +142,6 @@ extension SpeechRecognizerHandleView {
             self.resultLabel.text = result
             self.resultLabel.sizeToFit()
             self.resultLabel.isHidden = false
-//            self.showResultAnimated()
         }
     }
     

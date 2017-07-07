@@ -11,7 +11,7 @@ import UIKit
 
 class SpeechRecognizerAdapter: NSObject {
     
-    fileprivate let speechRecognizer: SpeechRecognizer = SpeechRecognizer()
+    fileprivate var speechRecognizer: SpeechRecognizeable = SpeechRecognizer()
     fileprivate var recognizeResult: String = ""
     fileprivate var finishTask: Task?
     fileprivate var isCanceled: Bool = false
@@ -70,7 +70,7 @@ extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
 
 extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
     
-    func onError(errorCode: IFlySpeechError) {
+    func onError(_ errorCode: IFlySpeechError) {
         handleView?.isCancelHidden = false
         finishTask = delay(1.0, task: { [weak self] in
             self?.handleView?.dismissAnimation()
@@ -93,25 +93,9 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         }
     }
     
-    func onResults(_ results: [Any]?, isLast: Bool) {
-        
-        var resultStr = ""
-        guard let dic = results?.first as? Dictionary<String, Any> else{
-            handleView?.setRecognizeResult("未识别到语音")
-            return
-        }
-        
-        dic.keys.forEach { key in
-            resultStr += key
-        }
-        
-        if let resultJson = SpeechRecognizerConfig.serializeSpeechRecognizeResult(from: resultStr) {
-            recognizeResult += resultJson
-        }
-        
-        if isLast {
-            handleView?.setRecognizeResult(recognizeResult)
-        }
+    func onResults(_ recognizeResult: String) {
+        self.recognizeResult = recognizeResult
+        handleView?.setRecognizeResult(recognizeResult)
     }
     
     func onEndOfSpeech() {
@@ -127,7 +111,7 @@ extension SpeechRecognizerAdapter: SpeechRecognizerDelegate {
         print("取消识别")
     }
     
-    func onVolumeChanged(volumeValue value: Int32) {
+    func onVolumeChanged(_ value: Int32) {
         handleView?.speechAnimation(with: value)
     }
     

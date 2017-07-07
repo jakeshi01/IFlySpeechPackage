@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xc3-Pa-vgp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -64,7 +64,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-943" y="115"/>
+            <point key="canvasLocation" x="-2378" y="95"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eTd-G5-8Z0">
+            <objects>
+                <viewController id="bgq-c0-CgD" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3IN-nE-Kcg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="whY-cp-eYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-86" y="82"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kBa-7k-Ped">
+            <objects>
+                <navigationController id="B1O-jp-K7O" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xpL-5y-141">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bgq-c0-CgD" kind="relationship" relationship="rootViewController" id="H1H-lU-XCU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgq-PH-EeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-871" y="81"/>
         </scene>
         <!--Speech Recognizer View Controller-->
         <scene sceneID="Rvi-vz-tyY">
@@ -179,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jo6-I8-5rE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1713" y="115"/>
+            <point key="canvasLocation" x="-1742" y="95"/>
         </scene>
     </scenes>
 </document>
