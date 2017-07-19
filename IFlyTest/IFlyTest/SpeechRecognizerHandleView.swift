@@ -30,6 +30,7 @@ class SpeechRecognizerHandleView: UIView, SpeechRecognizeAction {
 
     var finishAction: (() -> Void)?
     fileprivate var willCancel: Bool = false
+    fileprivate var speechImages: [UIImage] = []
     var isCancelHidden: Bool = false
     
     lazy fileprivate var stateImageView: UIImageView = {
@@ -74,6 +75,7 @@ class SpeechRecognizerHandleView: UIView, SpeechRecognizeAction {
 private extension SpeechRecognizerHandleView {
     
     func initialization() {
+        loadGifImages()
         resultLabel.isHidden = true
         stateImageView.isHidden = true
         
@@ -86,6 +88,19 @@ private extension SpeechRecognizerHandleView {
         stateImageView.isHidden = true
         resultLabel.text = ""
         willCancel = false
+    }
+    
+    func loadGifImages() {
+        guard let path = Bundle.main.path(forResource: "speech", ofType: "bundle") else { return }
+        DispatchQueue.global().async {
+            if let arrays = try? FileManager.default.contentsOfDirectory(atPath: path) {
+                for name in arrays {
+                    if let image = UIImage(named: "speech.bundle" + "/\(name)") {
+                        self.speechImages.append(image)
+                    }
+                }
+            }
+        }
     }
     
 }
@@ -104,24 +119,26 @@ extension SpeechRecognizerHandleView {
         let base = 5 / 30.0
 
         if rate <= base {
-            stateImageView.image = #imageLiteral(resourceName: "speech_1")
+            stateImageView.image = speechImages[0]
         } else if rate <= base * 2 {
-            stateImageView.image = #imageLiteral(resourceName: "speech_2")
+            stateImageView.image = speechImages[1]
         } else if rate <= base * 3 {
-            stateImageView.image = #imageLiteral(resourceName: "speech_3")
+            stateImageView.image = speechImages[2]
         } else if rate <= base * 4 {
-            stateImageView.image = #imageLiteral(resourceName: "speech_4")
+            stateImageView.image = speechImages[3]
         } else if rate <= base * 5 {
-            stateImageView.image = #imageLiteral(resourceName: "speech_5")
+            stateImageView.image = speechImages[4]
         } else if rate <= base * 7 {
-            stateImageView.image = #imageLiteral(resourceName: "speech_6")
+            stateImageView.image = speechImages[5]
+        } else if rate <= base * 8 {
+            stateImageView.image = speechImages[6]
         } else {
-            stateImageView.image = #imageLiteral(resourceName: "speech_7")
+            stateImageView.image = speechImages[7]
         }
     }
     
     func cancelSpeechAction() {
-        stateImageView.image = #imageLiteral(resourceName: "cancel_speech")
+        stateImageView.image = speechImages.last
         willCancel = true
     }
     
@@ -131,12 +148,13 @@ extension SpeechRecognizerHandleView {
     
     func endSpeechAction() {
         stateImageView.isHidden = true
-        stateImageView.image = #imageLiteral(resourceName: "speech_1")
+        stateImageView.image = speechImages.first
     }
     
     func setRecognizeResult(_ result: String?) {
         guard !willCancel else { return }
         delay(0.5) {
+            guard self.stateImageView.isHidden else { return }
             self.finishAction?()
             self.dismissProgressHud()
             self.resultLabel.text = result

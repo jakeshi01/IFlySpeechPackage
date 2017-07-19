@@ -71,7 +71,8 @@ private extension NormalSpeechRecognizerBar {
         speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.willCancelSpeech), for: .touchDragExit)
         speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechEnd), for: .touchUpInside)
         speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechCanceled), for: .touchUpOutside)
-
+        
+        
         addSubview(speechBtn)
         addSubview(seperateLine)
         backgroundColor = UIColor.lightGray

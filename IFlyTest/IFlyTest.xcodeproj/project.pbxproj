@@ -29,6 +29,7 @@
 		AA9A7D4C1F0A297B007CF3A0 /* preloader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */; };
 		AA9A7D4E1F0A4A3E007CF3A0 /* GCDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A7D4D1F0A4A3E007CF3A0 /* GCDExtension.swift */; };
 		AA9A7D501F0B7313007CF3A0 /* SpeechRecognizerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A7D4F1F0B7312007CF3A0 /* SpeechRecognizerAdapter.swift */; };
+		AAC2DA651F1EFD4E00665C7D /* speech.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAC2DA641F1EFD4E00665C7D /* speech.bundle */; };
 		AADEA39B1F03630F00B2DB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */; };
 		AADEA39D1F03630F00B2DB84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEA39C1F03630F00B2DB84 /* ViewController.swift */; };
 		AADEA3A01F03630F00B2DB84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADEA39E1F03630F00B2DB84 /* Main.storyboard */; };
@@ -82,6 +83,7 @@
 		AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = preloader.bundle; sourceTree = "<group>"; };
 		AA9A7D4D1F0A4A3E007CF3A0 /* GCDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDExtension.swift; sourceTree = "<group>"; };
 		AA9A7D4F1F0B7312007CF3A0 /* SpeechRecognizerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerAdapter.swift; sourceTree = "<group>"; };
+		AAC2DA641F1EFD4E00665C7D /* speech.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = speech.bundle; sourceTree = "<group>"; };
 		AADEA3971F03630F00B2DB84 /* IFlyTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IFlyTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AADEA39C1F03630F00B2DB84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				AADEA3A11F03630F00B2DB84 /* Assets.xcassets */,
 				AADEA3A31F03630F00B2DB84 /* LaunchScreen.storyboard */,
 				AADEA3A61F03630F00B2DB84 /* Info.plist */,
+				AAC2DA641F1EFD4E00665C7D /* speech.bundle */,
 				AA13A2381F0E1FCC00C7EC6B /* wave.bundle */,
 				AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */,
 				5D2EEF2D1F08EF1A00F0268A /* iflyMSC.framework */,
@@ -346,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA13A2391F0E1FCC00C7EC6B /* wave.bundle in Resources */,
+				AAC2DA651F1EFD4E00665C7D /* speech.bundle in Resources */,
 				AADEA3A51F03630F00B2DB84 /* LaunchScreen.storyboard in Resources */,
 				AADEA3A21F03630F00B2DB84 /* Assets.xcassets in Resources */,
 				AA9A7D4C1F0A297B007CF3A0 /* preloader.bundle in Resources */,

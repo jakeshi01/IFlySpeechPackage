@@ -21,7 +21,8 @@ class RecognizerBarViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         speechAdapter.recognizerBar = recognizerBar
         speechAdapter.handleView = speechHandleView
-
+        navigationController?.interactivePopGestureRecognizer?.delaysTouchesEnded = false
+        navigationController?.interactivePopGestureRecognizer?.delaysTouchesBegan = false
     }
 
 }
@@ -39,7 +40,8 @@ class SpeechRecognizerViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         speechAdapter.recognizerBar = recognizerBar
         speechAdapter.handleView = speechHandleView
-        
+        navigationController?.interactivePopGestureRecognizer?.delaysTouchesEnded = false
+        navigationController?.interactivePopGestureRecognizer?.delaysTouchesBegan = false
     }
 }
 

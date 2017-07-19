@@ -39,7 +39,11 @@ class SpeechRecognizerAdapter: NSObject {
 extension SpeechRecognizerAdapter: SpeechRecognizerControlDelegate {
     
     func beginSpeech() {
-        speechRecognizer.startListening()
+        let isBegin = speechRecognizer.startListening()
+        guard isBegin else { return }
+        if let task = finishTask {
+            cancel(task)
+        }
         cancel(finishTask)
         handleView?.isCancelHidden = true
         handleView?.showAnimation()

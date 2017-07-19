@@ -53,7 +53,7 @@ protocol SpeechRecognizeable {
     var delegate: SpeechRecognizerDelegate? { set get}
     
     init()
-    func startListening()
+    func startListening() -> Bool
     func stopListening()
     func cancelSpeech()
 }
@@ -97,8 +97,8 @@ class SpeechRecognizer: NSObject, SpeechRecognizeable {
 
 extension SpeechRecognizer {
     
-    func startListening() {
-        speechRecognizer.startListening()
+    func startListening() -> Bool {
+        return speechRecognizer.startListening()
     }
     
     func stopListening() {
@@ -124,6 +124,7 @@ extension SpeechRecognizer: IFlySpeechRecognizerDelegate {
         var resultStr = ""
         guard let dic = results?.first as? Dictionary<String, Any> else{
             delegate?.onResults("未识别到语音")
+            recognizeResult = ""
             return
         }
         
@@ -133,10 +134,12 @@ extension SpeechRecognizer: IFlySpeechRecognizerDelegate {
         
         if let resultJson = IFlySpeechRecognizerConfig.serializeSpeechRecognizeResult(from: resultStr) {
             recognizeResult += resultJson
+            
         }
         
         if isLast {
             delegate?.onResults(recognizeResult)
+            recognizeResult = ""
         }
         
     }
