@@ -13,9 +13,10 @@ fileprivate struct IFlySpeechRecognizerConfig {
     let domain = "iat"        //应用领域：听写
     let noDot = "0"           //非自动补全标点
     let rate_16K = "16000"     //采样率 = 16k
-    let timeOut = "15000"      //识别语音时长 = 15s
+    let timeOut = "60000"      //识别语音时长 = 15s
     let vad_bos = "3000"       //前段静默检测时长 = 3s
     let vad_eos = "3000"       //后段静默检测时长 = 3s
+    let audio_path = "iat.pcm"  //录音文件存储路径
     
     static func serializeSpeechRecognizeResult(from JSONData:String?) -> String? {
         
@@ -90,6 +91,7 @@ class SpeechRecognizer: NSObject, SpeechRecognizeable {
         speechRecognizer.setParameter(config.timeOut, forKey: IFlySpeechConstant.speech_TIMEOUT())
         speechRecognizer.setParameter(config.vad_bos, forKey: IFlySpeechConstant.vad_BOS())
         speechRecognizer.setParameter(config.vad_eos, forKey: IFlySpeechConstant.vad_EOS())
+//        speechRecognizer.setParameter(config.audio_path, forKey: IFlySpeechConstant.asr_AUDIO_PATH())
         
         speechRecognizer.delegate = self
     }

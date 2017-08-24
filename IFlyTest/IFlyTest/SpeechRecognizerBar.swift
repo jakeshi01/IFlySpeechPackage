@@ -72,7 +72,6 @@ private extension NormalSpeechRecognizerBar {
         speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechEnd), for: .touchUpInside)
         speechBtn.addTarget(self, action: #selector(NormalSpeechRecognizerBar.speechCanceled), for: .touchUpOutside)
         
-        
         addSubview(speechBtn)
         addSubview(seperateLine)
         backgroundColor = UIColor.lightGray
@@ -97,6 +96,7 @@ private extension NormalSpeechRecognizerBar {
     @objc func speechCanceled() {
         delegate?.speechCanceled()
     }
+
 }
 
 class AnimateSpeechRecognizerBar: UIView, SpeechRecognizerControl {

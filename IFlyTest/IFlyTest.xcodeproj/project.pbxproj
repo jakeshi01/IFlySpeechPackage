@@ -29,7 +29,11 @@
 		AA9A7D4C1F0A297B007CF3A0 /* preloader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */; };
 		AA9A7D4E1F0A4A3E007CF3A0 /* GCDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A7D4D1F0A4A3E007CF3A0 /* GCDExtension.swift */; };
 		AA9A7D501F0B7313007CF3A0 /* SpeechRecognizerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A7D4F1F0B7312007CF3A0 /* SpeechRecognizerAdapter.swift */; };
+		AAAAB4F71F42D28000957D19 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAAB4F61F42D28000957D19 /* libmp3lame.a */; };
+		AAAAB4FA1F42D2B600957D19 /* AudioEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAAB4F91F42D2B600957D19 /* AudioEncoding.m */; };
+		AAAAB4FC1F42D95B00957D19 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAAB4FB1F42D95B00957D19 /* AudioManager.swift */; };
 		AAC2DA651F1EFD4E00665C7D /* speech.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAC2DA641F1EFD4E00665C7D /* speech.bundle */; };
+		AADBDE371F4D81B600237787 /* Timer+Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADBDE361F4D81B600237787 /* Timer+Weak.swift */; };
 		AADEA39B1F03630F00B2DB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */; };
 		AADEA39D1F03630F00B2DB84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEA39C1F03630F00B2DB84 /* ViewController.swift */; };
 		AADEA3A01F03630F00B2DB84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADEA39E1F03630F00B2DB84 /* Main.storyboard */; };
@@ -83,7 +87,13 @@
 		AA9A7D4B1F0A297B007CF3A0 /* preloader.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = preloader.bundle; sourceTree = "<group>"; };
 		AA9A7D4D1F0A4A3E007CF3A0 /* GCDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDExtension.swift; sourceTree = "<group>"; };
 		AA9A7D4F1F0B7312007CF3A0 /* SpeechRecognizerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerAdapter.swift; sourceTree = "<group>"; };
+		AAAAB4F51F42D28000957D19 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		AAAAB4F61F42D28000957D19 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		AAAAB4F81F42D2B600957D19 /* AudioEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEncoding.h; sourceTree = "<group>"; };
+		AAAAB4F91F42D2B600957D19 /* AudioEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioEncoding.m; sourceTree = "<group>"; };
+		AAAAB4FB1F42D95B00957D19 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		AAC2DA641F1EFD4E00665C7D /* speech.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = speech.bundle; sourceTree = "<group>"; };
+		AADBDE361F4D81B600237787 /* Timer+Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+Weak.swift"; sourceTree = "<group>"; };
 		AADEA3971F03630F00B2DB84 /* IFlyTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IFlyTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AADEA39C1F03630F00B2DB84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA9A7D3F1F0364C3007CF3A0 /* libicucore.tbd in Frameworks */,
+				AAAAB4F71F42D28000957D19 /* libmp3lame.a in Frameworks */,
 				AA9A7D3D1F0364B9007CF3A0 /* libc++.tbd in Frameworks */,
 				AA9A7D3B1F0364A5007CF3A0 /* QuartzCore.framework in Frameworks */,
 				AA9A7D391F03649D007CF3A0 /* AddressBook.framework in Frameworks */,
@@ -170,6 +181,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AAAAB4F31F42D27700957D19 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				AADBDE361F4D81B600237787 /* Timer+Weak.swift */,
+				AAAAB4F41F42D28000957D19 /* lame */,
+				AAAAB4F81F42D2B600957D19 /* AudioEncoding.h */,
+				AAAAB4F91F42D2B600957D19 /* AudioEncoding.m */,
+				AAAAB4FB1F42D95B00957D19 /* AudioManager.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		AAAAB4F41F42D28000957D19 /* lame */ = {
+			isa = PBXGroup;
+			children = (
+				AAAAB4F51F42D28000957D19 /* lame.h */,
+				AAAAB4F61F42D28000957D19 /* libmp3lame.a */,
+			);
+			path = lame;
+			sourceTree = "<group>";
+		};
 		AADEA38E1F03630F00B2DB84 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +227,7 @@
 		AADEA3991F03630F00B2DB84 /* IFlyTest */ = {
 			isa = PBXGroup;
 			children = (
+				AAAAB4F31F42D27700957D19 /* Audio */,
 				AA9A7D4D1F0A4A3E007CF3A0 /* GCDExtension.swift */,
 				AA9A7D411F0381C7007CF3A0 /* IFlyTest_Bridge.h */,
 				AADEA39A1F03630F00B2DB84 /* AppDelegate.swift */,
@@ -430,9 +463,12 @@
 				AA9A7D501F0B7313007CF3A0 /* SpeechRecognizerAdapter.swift in Sources */,
 				AA9A7D461F039EE4007CF3A0 /* SpeechProtocol.swift in Sources */,
 				AA9A7D4A1F0A2631007CF3A0 /* UIView+Hub.swift in Sources */,
+				AAAAB4FA1F42D2B600957D19 /* AudioEncoding.m in Sources */,
 				AA9A7D481F06411E007CF3A0 /* SpeechRecognizerBar.swift in Sources */,
 				AA9A7D4E1F0A4A3E007CF3A0 /* GCDExtension.swift in Sources */,
 				AADEA39D1F03630F00B2DB84 /* ViewController.swift in Sources */,
+				AAAAB4FC1F42D95B00957D19 /* AudioManager.swift in Sources */,
+				AADBDE371F4D81B600237787 /* Timer+Weak.swift in Sources */,
 				AADEA39B1F03630F00B2DB84 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,6 +635,10 @@
 				);
 				INFOPLIST_FILE = IFlyTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IFlyTest/Audio/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssj.www.IFlyTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -620,6 +660,10 @@
 				);
 				INFOPLIST_FILE = IFlyTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IFlyTest/Audio/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssj.www.IFlyTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

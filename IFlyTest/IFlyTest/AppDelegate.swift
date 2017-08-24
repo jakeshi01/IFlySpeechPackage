@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let IFlyAppID = "appid=594b2dc4"
@@ -24,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             IFlySetting.setLogFile(.LVL_NONE)
             IFlySetting.showLogcat(false)
         #endif
-
         
 //        let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
 //        let cachePath = paths.first
